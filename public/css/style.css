@@ -1,0 +1,24 @@
+body {
+    background: #ffffff;
+}
+
+#header {
+    padding: 20px;
+    background: #53b2fc;
+}
+
+#content {
+    background: #aaaaaa;
+    padding: 20px;
+}
+
+#reg {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+/*#footer {*/
+    /*background: green;*/
+    /*padding: 20px;*/
+/*}*/
