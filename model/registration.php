@@ -22,20 +22,16 @@ class ModelRegistration extends Database
     }
 
 
-    public function regNewUser($username, $email, $location)
+    public function regNewUser($name, $email, $id_territory)
     {
-        return $this->insert_to_db("INSERT INTO `users` (`username`, `email`, `territory`) VALUES ('$username', '$email','$location')");
+        return $this->insert_to_db("INSERT INTO `users` (`name`, `email`, `territory`) VALUES ('$name', '$email','$id_territory')");
     }
 
     public function getAddress($id)
     {
-        return $this->get_one_db("SELECT `ter_address` FROM `t_koatuu_tree` WHERE `ter_id` = '" . $id . "'");
+        return $this->get_one_db("SELECT `ter_id`, `ter_address` FROM `t_koatuu_tree` WHERE `ter_id` = '" . $id . "'");
     }
 
-    public function isExistUser($username)
-    {
-        return $this->get_all_db("SELECT `username` FROM users WHERE `username` = '" . $username . "'");
-    }
 
     public function isExistEmail($email)
     {
@@ -43,6 +39,6 @@ class ModelRegistration extends Database
     }
 
     public function userInfo($email){
-        return $this->get_one_db("SELECT * FROM `users` WHERE `email` = '". $email ."'");
+        return $this->get_one_db("SELECT u.name, u.email, u.territory, ter.ter_address FROM users u LEFT JOIN t_koatuu_tree ter ON u.territory = ter.ter_id WHERE u.email = '". $email ."'");
     }
 }

@@ -1,1 +1,0 @@
-it's help view

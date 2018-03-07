@@ -7,7 +7,7 @@ class Route {
 
     public function __construct()
     {
-        $url = isset($_GET['url']) ? $_GET['url'] : null;
+        $url = isset($_GET['route']) ? $_GET['route'] : null;
         $url = rtrim($url, '/');
         $url = explode('/', $url);
         $file = 'controller/' . $url[0] . '.php';
@@ -43,7 +43,32 @@ class Route {
                 $controller->index();
             }
         }
+
+//        if (isset($url[2])) {
+//            if (method_exists($controller, $url[1])) {
+//                $params = array();
+//                $length = count($url);
+//                for ($i = 1; $i < $length; $i++) {
+//                    array_push($params, $url[$i]);
+//                }
+//                foreach ($params as $param) {
+//                    echo $param . '<br>';
+//                }
+//                $controller->{$url[1]}($params);
+//            } else {
+//                echo 'Error!';
+//            }
+//        } else {
+//            if (isset($url[1])) {
+//                $controller->{$url[1]}();
+//            } else {
+//                $controller->index();
+//            }
+//        }
+
+
     }
+
 }
 
 

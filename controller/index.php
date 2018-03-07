@@ -11,4 +11,11 @@ class Index extends Controller
     {
         $this->view->render('index');
     }
+
+//    public function callme($a, $b, $c){
+//        print_r($a);
+//        echo 'param first ' . $a .'<br>';
+//        echo 'param second ' . $b .'<br>';
+//        echo 'param third ' . $c .'<br>';
+//    }
 }

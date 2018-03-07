@@ -1,67 +1,43 @@
 <?php
 class Database{
     public $db;
-    public function __construct(){
-        $this->db = mysqli_connect(HOST,USER,PASSWORD,DATABASE);
+    public function __construct() {
+        $this->db = new mysqli(HOST,USER,PASSWORD,DATABASE);
 
-        if(!$this->db){
-            exit ('No connection database!');
-        }
-        if(!mysqli_select_db($this->db, DATABASE)){
-            exit ('No table!');
+        if ($this->db->connect_error) {
+            trigger_error('Error: Could not make a database link (' . $this->db->connect_errno . ') ' . $this->db->connect_error);
+            exit();
         }
         return $this->db;
     }
 
-    public function get_all_db($sql){
-        $res = mysqli_query($this->db, $sql);
+    public function get_all_db($sql) {
+        $res = $this->db->query($sql);
         if(!$res){
             return array();
-        }
-        else{
-            while ($row = mysqli_fetch_assoc($res)) {
+        } else {
+            while ($row = $res->fetch_assoc()) {
                 $res_row[] = $row;
             }
         }
         return $res_row;
     }
-    public function get_one_db($sql){
-        $res = mysqli_query($this->db, $sql);
-        if(!$res){
+
+    public function get_one_db($sql) {
+        $res = $this->db->query($sql);
+        if(!$res) {
             return array();
-        }
-        else{
-            return mysqli_fetch_assoc($res);
+        } else {
+            return $res->fetch_assoc();
         }
     }
 
-    public function insert_to_db($sql){
-        $res = mysqli_query($this->db, $sql);
-        if(!$res){
+    public function insert_to_db($sql) {
+        $res = $this->db->query($sql);
+        if(!$res) {
             return FALSE;
-        }
-        else{
+        } else {
             return $this->db->insert_id;
-        }
-    }
-
-    public function insert_to($sql){
-        $res = mysqli_query($this->db, $sql);
-        if(!$res){
-            return FALSE;
-        }
-        else{
-            return TRUE;
-        }
-    }
-
-    public function update_to_db($sql){
-        $res = mysqli_query($this->db, $sql);
-        if(!$res){
-            return FALSE;
-        }
-        else{
-            return TRUE;
         }
     }
 }
